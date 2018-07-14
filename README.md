@@ -8,4 +8,4 @@ Any help making this script better will be greatly appreciated!
 
 ## Example of the Script
 
-![Sorry for the poor quality!](https://orig00.deviantart.net/396c/f/2018/193/3/a/scapemenu_by_pierrce-dch0snd.gif "Scape Example")
+[![Scape Rogue-Like](http://img.youtube.com/vi/4N8u5OHmooo/0.jpg)](https://www.youtube.com/watch?v=4N8u5OHmooo)
