@@ -8,4 +8,4 @@ Any help making this script better will be greatly appreciated!
 
 ## Example of the Script
 
-![Sorry for the poor quality!](https://orig00.deviantart.net/396c/f/2018/193/3/a/scapemenu_by_pierrce-dch0snd.gif)
+![Sorry for the poor quality!](https://orig00.deviantart.net/396c/f/2018/193/3/a/scapemenu_by_pierrce-dch0snd.gif "Scape Example")
