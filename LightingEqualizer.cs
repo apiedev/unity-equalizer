@@ -5,38 +5,50 @@ using UnityEngine;
 public class LightingEqualizer : MonoBehaviour {
 
     /* Public values that can be set in Unity */
-	public AudioAnalyzer analyzer;
+    [Tooltip("Audio Analyzer should be attached to Audio Source and set here.")]
+    public AudioAnalyzer analyzer;
+
+    /* Intensity of the equalizing effect */
     public float intensity;
+
+    /* Color component of shader to modify alpha channel */
+    [Tooltip("Shader Settings -> Select Shader -> Properties: Usually named _Color")]
     public string colorShaderName;
 
+    /* These should be attached to the same object as this script */
     private Light curLight;
-    private Material buildingLight;
+    private Material objectLightSprite;
 	private float originalIntensity;
     
 
-	// Use this for initialization
-	private void Start () {
+	/* Called upon game start or object initialization */
+	private void Awake () {
 
+        /* If you don't automatically set an analyzer, it searches the scene for one */
         if (analyzer == null)
-            analyzer = GameObject.Find("Music").GetComponent<AudioAnalyzer>();
+            analyzer = GameObject.FindObjectOfType<AudioAnalyzer>();
 
+        /* If there is a light component attached, sets up vars required */
         if(gameObject.GetComponent<Light>() != null)
         {
             curLight = gameObject.GetComponent<Light>();
-
             originalIntensity = curLight.intensity;
         }
 		    
+        /* Attempts to grab the material of a sprite on this object */
         if (gameObject.GetComponent<SpriteRenderer>() != null)
-            buildingLight = gameObject.GetComponent<SpriteRenderer>().material; 
+            objectLightSprite = gameObject.GetComponent<SpriteRenderer>().material; 
 	}
 	
-	// Update is called once per frame
+	/* Called once per frame by the Unity Engine */
 	private void Update () {
+
+        /* If there's a light, update its intensity with the music */
         if(curLight != null)
 		    curLight.intensity = (originalIntensity + (analyzer.RmsValue * 10)) * intensity;
 
-        if(buildingLight != null)
-            buildingLight.SetColor("_Color", new Color(buildingLight.GetColor("_Color").r, buildingLight.GetColor("_Color").g, buildingLight.GetColor("_Color").b, analyzer.RmsValue*5));
+        /* If there's a light sprite, update its transparency with the music */
+        if(objectLightSprite != null)
+            objectLightSprite.SetColor("_Color", new Color(objectLightSprite.GetColor(colorShaderName).r, objectLightSprite.GetColor(colorShaderName).g, objectLightSprite.GetColor(colorShaderName).b, analyzer.RmsValue*intensity));
     }
 }
